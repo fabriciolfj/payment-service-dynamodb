@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  localstack:
+    image: 'public.ecr.aws/localstack/localstack:3.0.2'
+    ports:
+      - '4566:4566'
+    volumes:
+      - ./src/test/resources/localstack:/etc/localstack/init/ready.d:ro
+      - ./src/test/resources/localstack:/localstack/:ro
+
+  dynamodb-admin:
+    image: 'aaronshaf/dynamodb-admin'
+    ports:
+      - "8001:8001"
+    environment:
+      DYNAMO_ENDPOINT: "http://host.docker.internal:4566"
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: dummy-access-key
+      AWS_SECRET_ACCESS_KEY: dummy-secret-key
+    depends_on:
+      - localstack
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: payment-dynamodb
+
+aws:
+  dynamodb:
+    endpoint: http://localhost:4566
+    region: us-east-1
+    secretKey: dummy-secret-key
+    accessKey: dummy-secret-key
