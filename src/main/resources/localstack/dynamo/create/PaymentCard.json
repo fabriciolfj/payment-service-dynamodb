@@ -1,0 +1,49 @@
+{
+  "TableName": "Subscription",
+  "KeySchema": [
+    {
+      "AttributeName": "code",
+      "KeyType": "HASH"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "code",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "identifier",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "customerId",
+      "AttributeType": "S"
+    }
+  ],
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "xie_paymentcard_by_customer",
+      "KeySchema": [
+        {
+          "AttributeName": "customerId",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "code",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+      }
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  }
+}
