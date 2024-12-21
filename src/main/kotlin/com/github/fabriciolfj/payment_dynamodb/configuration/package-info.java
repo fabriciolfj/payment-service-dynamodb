@@ -1,0 +1,1 @@
+package com.github.fabriciolfj.payment_dynamodb.configuration;
