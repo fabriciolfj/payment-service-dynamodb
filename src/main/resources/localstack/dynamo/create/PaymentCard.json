@@ -1,5 +1,5 @@
 {
-  "TableName": "Subscription",
+  "TableName": "PaymentCard",
   "KeySchema": [
     {
       "AttributeName": "code",
