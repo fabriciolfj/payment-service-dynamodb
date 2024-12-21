@@ -10,5 +10,6 @@ object PaymentCardDataMapper {
             paymentCard.getCustomerCode(),
             paymentCard.getValue(),
             paymentCard.getFlag(),
-            paymentCard.getIdentifier())
+            paymentCard.getIdentifier(),
+            paymentCard.getStatus())
 }
