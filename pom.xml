@@ -31,11 +31,17 @@
 		<kotlin.version>1.9.25</kotlin.version>
 		<awspring.version>3.2.0</awspring.version>
 		<aws.version>2.29.38</aws.version>
+		<kotlin.log.version>7.0.3</kotlin.log.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.oshai</groupId>
+			<artifactId>kotlin-logging-jvm</artifactId>
+			<version>${kotlin.log.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
@@ -69,15 +75,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependencies>
-				<dependency>
-					<groupId>software.amazon.awssdk</groupId>
-					<artifactId>bom</artifactId>
-					<version>${aws.version}</version>
-					<type>pom</type>
-					<scope>import</scope>
-				</dependency>
-			</dependencies>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>bom</artifactId>
+				<version>${aws.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>io.awspring.cloud</groupId>
 				<artifactId>spring-cloud-aws-dependencies</artifactId>
