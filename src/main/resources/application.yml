@@ -8,3 +8,7 @@ aws:
     region: us-east-1
     secretKey: dummy-secret-key
     accessKey: dummy-secret-key
+
+logging:
+  level:
+    root: info
