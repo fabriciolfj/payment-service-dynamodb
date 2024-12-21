@@ -10,9 +10,13 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema
 @Configuration
 class TableConfiguration {
 
+    companion object {
+        const val PAYMENT_CARD_TABLE = "PaymentCard"
+    }
+
     @Bean
     fun paymentCardDataTable(client: DynamoDbEnhancedClient) : DynamoDbTable<PaymentCardData> {
         val schema = TableSchema.fromBean(PaymentCardData::class.java)
-        return client.table("payment_card", schema)
+        return client.table(PAYMENT_CARD_TABLE, schema)
     }
 }
