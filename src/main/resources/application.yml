@@ -1,3 +1,8 @@
+server:
+  url: ${server.address:http://localhost}:${server.port}
+  address: ${HOSTNAME:localhost}
+  port: 8080
+
 spring:
   application:
     name: payment-dynamodb
@@ -12,3 +17,4 @@ aws:
 logging:
   level:
     root: info
+

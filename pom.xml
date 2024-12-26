@@ -32,6 +32,7 @@
 		<awspring.version>3.2.0</awspring.version>
 		<aws.version>2.29.38</aws.version>
 		<kotlin.log.version>7.0.3</kotlin.log.version>
+		<spring-cloud.version>2024.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -76,6 +77,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-test-junit5</artifactId>
 			<scope>test</scope>
@@ -95,6 +101,13 @@
 				<groupId>io.awspring.cloud</groupId>
 				<artifactId>spring-cloud-aws-dependencies</artifactId>
 				<version>${awspring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

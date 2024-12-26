@@ -1,16 +1,35 @@
 package com.github.fabriciolfj.payment_dynamodb
 
-import org.junit.jupiter.api.Test
+import br.com.blz.subscription.configuration.DynamodbClientLocalConfig
+import com.github.fabriciolfj.payment_dynamodb.application.entrypoint.controller.handler.MainExceptionHandler
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.boot.test.context.SpringBootTest
-
+import org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.testcontainers.containers.ComposeContainer
+import org.testcontainers.containers.wait.strategy.Wait.forLogMessage
+import org.testcontainers.shaded.org.apache.commons.lang3.StringUtils
+import java.io.BufferedReader
+import java.io.File
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.nio.charset.StandardCharsets
+import java.util.stream.Collectors
 
 
 @ExtendWith(MockitoExtension::class, SpringExtension::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [Application::class])
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [PaymentDynamodbApplicationTests::class])
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureWireMock(port = 0)
-@Import(DynamodbClientLocalConfig::class, OrderClientConfig::class)
+@Import(DynamodbClientLocalConfig::class)
 abstract class PaymentDynamodbApplicationTests {
 	@LocalServerPort
 	private var port: Int = 0
@@ -19,7 +38,7 @@ abstract class PaymentDynamodbApplicationTests {
 
 	protected fun setUp(controller: Any) {
 		mvc = MockMvcBuilders.standaloneSetup(controller)
-			.setControllerAdvice(MainExceptionHandler("https://localhost:$port"))
+			.setControllerAdvice(MainExceptionHandler())
 			.build()
 	}
 
