@@ -40,6 +40,22 @@
         "ReadCapacityUnits": 5,
         "WriteCapacityUnits": 5
       }
+    },
+    {
+      "IndexName": "xie_paymentcard_by_identifier",
+      "KeySchema": [
+        {
+          "AttributeName": "identifier",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+      }
     }
   ],
   "ProvisionedThroughput": {

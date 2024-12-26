@@ -1,15 +1,16 @@
 package com.github.fabriciolfj.payment_dynamodb.application.adapter.card
 
 import com.github.fabriciolfj.payment_dynamodb.application.repositories.card.PaymentCardData
-import com.github.fabriciolfj.payment_dynamodb.domain.entities.PaymentCard
+import com.github.fabriciolfj.payment_dynamodb.domain.entities.CreditCardPayment
 
 object PaymentCardDataMapper {
 
-    fun toData(paymentCard: PaymentCard): PaymentCardData =
-        PaymentCardData(paymentCard.code,
-            paymentCard.getCustomerCode(),
-            paymentCard.getValue(),
-            paymentCard.getFlag(),
-            paymentCard.getIdentifier(),
-            paymentCard.getStatus())
+    fun toData(card: CreditCardPayment): PaymentCardData =
+        PaymentCardData(card.code,
+            card.customer,
+            card.value,
+            card.flagDescription,
+            card.type,
+            card.identifier,
+            card.statusDescription)
 }

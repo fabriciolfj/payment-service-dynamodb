@@ -19,6 +19,8 @@ data class PaymentCardData(
     val customer: String? = null,
     val value: BigDecimal? = null,
     val flag: String? = null,
+    val type: String? = null,
+    @get:DynamoDbSecondaryPartitionKey(indexNames = ["xie_paymentcard_by_identifier"])
     val identifier: String? = null,
     val status: String? = null,
     @get:DynamoDbUpdateBehavior(UpdateBehavior.WRITE_IF_NOT_EXISTS)

@@ -1,19 +1,15 @@
 package com.github.fabriciolfj.payment_dynamodb.domain.entities
 
 
-data class PaymentCard(val code: String,
-                       val flagCard: FlagCard,
-                       val payment: Payment,
-                       val customer: Customer,
-                       val status: Status) {
+data class PaymentCard(private val payment: Payment,
+                       private val customer: Customer,
+                       private val status: Status) {
 
-    fun getCustomerCode() = this.customer.code
+    val customerCode = this.customer.code
 
-    fun getValue() = this.payment.value
+    val value = this.payment.value
 
-    fun getFlag() = this.flagCard.description
+    val identifier = this.payment.identifier
 
-    fun getIdentifier() = this.payment.identifier
-
-    fun getStatus() = this.status.description
+    val statusDescription = this.status.description
 }
