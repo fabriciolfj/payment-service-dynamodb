@@ -12,5 +12,6 @@ object PaymentCardDataMapper {
             card.flagDescription,
             card.type,
             card.identifier,
-            card.statusDescription)
+            card.statusDescription,
+            card.installments)
 }

@@ -19,7 +19,6 @@ class CreditCardPaymentController(private val savePaymentCardCreditUseCase: Save
         log.info { "payload receive create payment card credit $request" }
 
         val card = CreditCardPaymentMapper.toEntity(request)
-
         savePaymentCardCreditUseCase.execute(card)
     }
 }
