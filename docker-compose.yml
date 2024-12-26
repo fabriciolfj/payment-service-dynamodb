@@ -7,8 +7,8 @@ services:
     ports:
       - '4566:4566'
     volumes:
-      - ./src/test/resources/localstack:/etc/localstack/init/ready.d:ro
-      - ./src/test/resources/localstack:/localstack/:ro
+      - ./src/main/resources/localstack:/etc/localstack/init/ready.d:ro
+      - ./src/main/resources/localstack:/localstack/:ro
 
   dynamodb-admin:
     image: 'aaronshaf/dynamodb-admin'

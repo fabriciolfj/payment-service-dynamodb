@@ -1,5 +1,5 @@
 {
-  "TableName": "Subscription",
+  "TableName": "PaymentCard",
   "KeySchema": [
     {
       "AttributeName": "code",
@@ -31,6 +31,22 @@
         {
           "AttributeName": "code",
           "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+      }
+    },
+    {
+      "IndexName": "xie_paymentcard_by_identifier",
+      "KeySchema": [
+        {
+          "AttributeName": "identifier",
+          "KeyType": "HASH"
         }
       ],
       "Projection": {
