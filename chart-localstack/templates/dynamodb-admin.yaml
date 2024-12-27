@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-dynamodb-admin
+spec:
+  selector:
+    matchLabels:
+      app: dynamodb-admin
+  template:
+    metadata:
+      labels:
+        app: dynamodb-admin
+    spec:
+      containers:
+        - name: dynamodb-admin
+          image: {{ .Values.dynamodbAdmin.image }}
+          ports:
+            - containerPort: {{ .Values.dynamodbAdmin.port }}
+          env:
+            - name: DYNAMO_ENDPOINT
+              value: http://{{ .Release.Name }}-localstack:{{ .Values.localstack.port }}
+            - name: AWS_REGION
+              value: us-east-1
+            - name: AWS_ACCESS_KEY_ID
+              value: dummy-access-key
+            - name: AWS_SECRET_ACCESS_KEY
+              value: dummy-secret-key

@@ -1,0 +1,44 @@
+# templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-init-script
+data:
+  init-dynamodb.sh: |
+    #!/bin/bash
+    awslocal dynamodb create-table \
+    --cli-input-json '{
+    "TableName": "PaymentCard",
+    "KeySchema": [{"AttributeName": "code","KeyType": "HASH"}],
+    "AttributeDefinitions": [
+      {"AttributeName": "code","AttributeType": "S"},
+      {"AttributeName": "identifier","AttributeType": "S"},
+      {"AttributeName": "customerId","AttributeType": "S"}
+    ],
+    "GlobalSecondaryIndexes": [
+      {
+        "IndexName": "xie_paymentcard_by_customer",
+        "KeySchema": [
+          {"AttributeName": "customerId","KeyType": "HASH"},
+          {"AttributeName": "code","KeyType": "RANGE"}
+        ],
+        "Projection": {"ProjectionType": "ALL"},
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        }
+      },
+      {
+        "IndexName": "xie_paymentcard_by_identifier",
+        "KeySchema": [{"AttributeName": "identifier","KeyType": "HASH"}],
+        "Projection": {"ProjectionType": "ALL"},
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        }
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }}'

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-dynamodb-admin
+spec:
+  selector:
+    app: dynamodb-admin
+  ports:
+    - port: {{ .Values.dynamodbAdmin.port }}
+      targetPort: {{ .Values.dynamodbAdmin.port }}
+  type: NodePort

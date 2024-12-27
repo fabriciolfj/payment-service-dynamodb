@@ -1,0 +1,29 @@
+{{- if .Values.localstack.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-localstack
+spec:
+  selector:
+    matchLabels:
+      app: localstack
+  template:
+    metadata:
+      labels:
+        app: localstack
+    spec:
+      volumes:
+        - name: init-script
+          configMap:
+            name: {{ .Release.Name }}-init-script
+            defaultMode: 0755 # Permissão no ConfigMap também
+      containers:
+        - name: localstack
+          volumeMounts:
+            - mountPath: /etc/localstack/init/ready.d
+              name: init-script
+              readOnly: true
+          image: {{ .Values.localstack.image }}
+          ports:
+            - containerPort: {{ .Values.localstack.port }}
+{{- end }}

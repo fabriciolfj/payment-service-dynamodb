@@ -1,0 +1,9 @@
+localstack:
+  enabled: true
+  image: public.ecr.aws/localstack/localstack:3.0.2
+  port: 4566
+
+dynamodbAdmin:
+  enabled: true
+  image: aaronshaf/dynamodb-admin
+  port: 8001

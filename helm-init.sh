@@ -1,0 +1,1 @@
+helm install localstack ./chart-localstack
