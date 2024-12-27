@@ -1,5 +1,6 @@
 package com.github.fabriciolfj.payment_dynamodb.application.adapter.card
 
+import com.github.fabriciolfj.payment_dynamodb.application.adapter.card.PaymentCardDataMapper.toCrediCard
 import com.github.fabriciolfj.payment_dynamodb.application.repositories.card.PaymentCardRepository
 import com.github.fabriciolfj.payment_dynamodb.domain.entities.CreditCardPayment
 import com.github.fabriciolfj.payment_dynamodb.domain.usecase.cardcredit.FindCardCreditByIdentifierAdapter
@@ -15,7 +16,7 @@ class FindCardCreditByIdentifierAdapterImpl(private val repository: PaymentCardR
         return repository.findByIdentifier(identifier)
             .let {
                 log.info { "found payment card $it" }
-                PaymentCardDataMapper.toCrediCard(it)
+                toCrediCard(it)
             }
     }
 }
