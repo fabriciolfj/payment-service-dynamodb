@@ -8,7 +8,7 @@ object CreditCardPaymentMapper {
     fun toEntity(request: CreditCartRequest) = CreditCardPayment(
         code = UUID.randomUUID().toString(),
         installments = request.installments!!,
-        flag = FlagCardCredit.toFlagCardCredit(request.flag!!),
+        flag = FlagCardCredit.toFlagCard(request.flag!!),
         payment = PaymentCard(
             payment = Payment(
                 value = request.value!!,

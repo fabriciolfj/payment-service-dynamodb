@@ -13,7 +13,7 @@ class PaymentCardRepository(private val table: DynamoDbTable<PaymentCardData>) {
     private val log = KotlinLogging.logger {}
 
     fun save(paymentCard: PaymentCardData) {
-        val expression = Expression.builder().expression("attribute_not_exists(id)").build()
+        val expression = Expression.builder().expression("attribute_not_exists(code)").build()
 
         val putItemRequest = PutItemEnhancedRequest.builder(PaymentCardData::class.java)
             .conditionExpression(expression)
@@ -23,7 +23,8 @@ class PaymentCardRepository(private val table: DynamoDbTable<PaymentCardData>) {
         try {
             table.putItem(putItemRequest)
         } catch (e: ConditionalCheckFailedException) {
-            val data = paymentCard.copy(code = paymentCard.customer)
+            log.warn { "payment id exits ${paymentCard.code}, generated new id ${paymentCard.customerId}" }
+            val data = paymentCard.copy(code = paymentCard.customerId)
             save(data)
         } catch (e: Exception) {
             throw e

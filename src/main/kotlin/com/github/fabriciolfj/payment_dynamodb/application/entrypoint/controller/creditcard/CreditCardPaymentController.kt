@@ -1,5 +1,6 @@
 package com.github.fabriciolfj.payment_dynamodb.application.entrypoint.controller.creditcard
 
+import com.github.fabriciolfj.payment_dynamodb.application.entrypoint.controller.creditcard.CreditCardPaymentMapper.toEntity
 import com.github.fabriciolfj.payment_dynamodb.domain.usecase.cardcredit.SavePaymentCardCreditUseCase
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.validation.Valid
@@ -18,7 +19,7 @@ class CreditCardPaymentController(private val savePaymentCardCreditUseCase: Save
     fun create(@Valid @RequestBody request: CreditCartRequest) {
         log.info { "payload receive create payment card credit $request" }
 
-        val card = CreditCardPaymentMapper.toEntity(request)
+        val card = toEntity(request)
         savePaymentCardCreditUseCase.execute(card)
     }
 }

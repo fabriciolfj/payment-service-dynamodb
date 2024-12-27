@@ -31,7 +31,7 @@ class MainExceptionHandler {
     fun handleGenericError(ex: Exception): ApiError {
         return ApiError(
             status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
-            title = "Internal Server Error"
+            title = "Internal Server Error, details ${ex.message}"
         )
     }
 }

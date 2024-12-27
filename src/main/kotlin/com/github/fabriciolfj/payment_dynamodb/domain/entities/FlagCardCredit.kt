@@ -5,8 +5,8 @@ enum class FlagCardCredit(val description: String) {
     MASTERCARD( "mastercard");
 
     companion object {
-        fun toFlagCardCredit(description: String): FlagCardCredit =
-            entries.firstOrNull { it.description == description }
+        fun toFlagCard(description: String): FlagCardCredit =
+            entries.firstOrNull { it.description.equals(description, ignoreCase = true) }
                 ?: throw IllegalArgumentException("Invalid flag card credit description: $description")
     }
 }

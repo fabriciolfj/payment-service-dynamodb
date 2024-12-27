@@ -7,8 +7,6 @@ import java.time.Instant
 
 data class CreditCartRequest(
     @field:NotEmpty(message = "{creditCard.identifier.empty}")
-    @field:Min(value = 1, message = "{creditCard.installments.min}")
-    @field:Max(value = 12, message = "{creditCard.installments.max}")
     val identifier: String?,
     @field:NotEmpty(message = "{creditCard.customer.empty}")
     val customer: String?,
@@ -17,7 +15,7 @@ data class CreditCartRequest(
     @field:NotNull(message = "{creditCard.installments.empty}")
     @field:Positive(message = "{creditCard.installments.positive}")
     val installments: Int?,
-    @field:NotEmpty(message = "{creditCard.flag.empty}")
+    @field:NotNull(message = "{creditCard.flag.empty}")
     @field:JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     val date: Instant?,
     @field:Pattern(regexp = "^(VISA|MASTERCARD)$", message = "{creditCard.flag.invalid}")
