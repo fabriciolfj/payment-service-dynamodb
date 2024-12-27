@@ -16,7 +16,7 @@ object PaymentCardDataMapper {
             card.installments,
             card.datePayment)
 
-    fun toCrediCard(data: PaymentCardData) = CreditCardPayment (
+    fun toCreditCard(data: PaymentCardData) = CreditCardPayment (
         code = data.code!!,
         installments = data.installments,
         flag = FlagCardCredit.toFlagCard(data.flag!!),
