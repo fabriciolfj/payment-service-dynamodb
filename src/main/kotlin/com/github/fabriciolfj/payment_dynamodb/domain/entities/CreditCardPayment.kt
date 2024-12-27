@@ -16,4 +16,6 @@ data class CreditCardPayment(val code: String,
     val customer = this.payment.customerCode
 
     val type = TypeCard.CREDIT.name
+
+    val datePayment = this.payment.date
 }

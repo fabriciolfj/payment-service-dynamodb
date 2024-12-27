@@ -12,4 +12,6 @@ data class PaymentCard(private val payment: Payment,
     val identifier = this.payment.identifier
 
     val statusDescription = this.status.description
+
+    val date = this.payment.date
 }

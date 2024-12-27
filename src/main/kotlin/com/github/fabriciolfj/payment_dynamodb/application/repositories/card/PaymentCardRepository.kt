@@ -1,10 +1,13 @@
 package com.github.fabriciolfj.payment_dynamodb.application.repositories.card
 
+import com.github.fabriciolfj.payment_dynamodb.constants.TabelaPaymentCardConstants.IDENTIFIER_INDEX
+import com.github.fabriciolfj.payment_dynamodb.utils.DynamodbUtils.createKey
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.stereotype.Repository
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable
 import software.amazon.awssdk.enhanced.dynamodb.Expression
 import software.amazon.awssdk.enhanced.dynamodb.model.PutItemEnhancedRequest
+import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.keyEqualTo
 import software.amazon.awssdk.services.dynamodb.model.ConditionalCheckFailedException
 
 @Repository
@@ -30,4 +33,16 @@ class PaymentCardRepository(private val table: DynamoDbTable<PaymentCardData>) {
             throw e
         }
     }
+
+    fun findByIdentifier(identifier: String): PaymentCardData =
+        table.index(IDENTIFIER_INDEX)
+            .query(keyEqualTo(createKey(identifier)))
+            .flatMap { it.items() }
+            .let { items ->
+                when {
+                    items.isEmpty() -> throw NoSuchElementException("payment card with id $identifier not found")
+                    items.size > 1 -> throw IllegalStateException("multiple payment cards found for identifier $identifier")
+                    else -> items.first()
+                }
+            }
 }

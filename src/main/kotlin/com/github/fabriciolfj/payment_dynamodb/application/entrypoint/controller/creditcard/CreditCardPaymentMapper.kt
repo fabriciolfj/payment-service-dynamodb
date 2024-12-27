@@ -19,4 +19,10 @@ object CreditCardPaymentMapper {
             status = Status.PENDING
         )
     )
+
+    fun toResponse(entity: CreditCardPayment) = CreditCardResponse(
+        code = entity.code,
+        date = entity.datePayment,
+        customerId = entity.customer
+    )
 }

@@ -34,4 +34,22 @@ class MainExceptionHandler {
             title = "Internal Server Error, details ${ex.message}"
         )
     }
+
+    @ExceptionHandler(NoSuchElementException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handleGenericError(ex: NoSuchElementException): ApiError {
+        return ApiError(
+            status = HttpStatus.NOT_FOUND.value(),
+            title = "Not Found, details ${ex.message}"
+        )
+    }
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleGenericError(ex: IllegalArgumentException): ApiError {
+        return ApiError(
+            status = HttpStatus.BAD_REQUEST.value(),
+            title = "Bad Request, details ${ex.message}"
+        )
+    }
 }
