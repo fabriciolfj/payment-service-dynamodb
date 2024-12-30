@@ -7,7 +7,31 @@ server:
 spring:
   application:
     name: payment-dynamodb
+  kafka:
+    # Configuração do servidor Kafka
+    bootstrap-servers:
+      - localhost:29092    # Endereço do broker Kafka (porta interna do container)
 
+    # Configurações do Consumer
+    consumer:
+      auto-offset-reset: earliest    # Define de onde começar a ler as mensagens (earliest = desde o início)
+      group-id: payment-service      # ID do grupo de consumidores
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer      # Deserializador da chave
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer    # Deserializador do valor
+      isolation-level: read_committed # Nível de isolamento para transações
+      enable-auto-commit: false      # Desabilita commit automático
+
+    # Configurações do Producer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer        # Serializador da chave
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer      # Serializador do valor
+      acks: all                      # Confirmação de recebimento (all = mais seguro)
+      retries: 3                     # Número de tentativas em caso de falha
+
+    # Configurações adicionais
+    properties:
+      security.protocol: PLAINTEXT   # Protocolo de segurança
+      max.poll.records: 500         # Máximo de registros por poll
 aws:
   dynamodb:
     endpoint: http://localhost:4566
