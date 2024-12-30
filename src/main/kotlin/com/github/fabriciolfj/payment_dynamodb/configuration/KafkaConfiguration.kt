@@ -18,9 +18,7 @@ import org.springframework.kafka.support.micrometer.KafkaTemplateObservationConv
 
 @Configuration
 @EnableKafka
-class KafkaConfiguration(
-    private val kafkaProperties: KafkaProperties
-) {
+class KafkaConfiguration(private val kafkaProperties: KafkaProperties) {
 
     @Bean
     fun consumerFactory(): ConsumerFactory<String, Any> {
