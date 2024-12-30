@@ -31,7 +31,7 @@ class KafkaConfiguration(private val kafkaProperties: KafkaProperties) {
     @Bean
     fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<*, *> {
         return ConcurrentKafkaListenerContainerFactory<String, Any>().apply {
-            setConsumerFactory(consumerFactory())
+            consumerFactory = consumerFactory()
             containerProperties.isObservationEnabled = true
             containerProperties.ackMode = ContainerProperties.AckMode.MANUAL
         }
