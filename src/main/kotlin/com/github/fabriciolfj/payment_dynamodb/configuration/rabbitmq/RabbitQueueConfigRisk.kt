@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class RabbitQueueConfigRisk(@Value("\${rabbitmq.risk.queue}") private val queueName: String) {
+class RabbitQueueConfigRisk(@Value("\${rabbit.risk.queue}") private val queueName: String) {
 
     @Bean
     fun queueRisk() = Queue(queueName, true)
