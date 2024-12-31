@@ -7,6 +7,11 @@ server:
 spring:
   application:
     name: payment-dynamodb
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   kafka:
     # Configuração do servidor Kafka
     bootstrap-servers:
@@ -42,4 +47,8 @@ aws:
 logging:
   level:
     root: info
+rabbit:
+  risk:
+    queue: queue-risk
+
 

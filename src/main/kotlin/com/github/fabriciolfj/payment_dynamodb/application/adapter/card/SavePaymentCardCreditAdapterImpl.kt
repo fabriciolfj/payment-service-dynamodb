@@ -16,7 +16,8 @@ class SavePaymentCardCreditAdapterImpl(private val repository: PaymentCardReposi
     override fun process(card: CreditCardPayment) {
         val data = toData(card)
 
-        repository.save(data)
-        log.info { "payment card saved ${card.code}" }
+        repository.save(data).also {
+            log.info { "payment card saved ${card.code}" }
+        }
     }
 }

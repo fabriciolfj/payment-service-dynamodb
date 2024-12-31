@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.payment_dynamodb.configuration
+package com.github.fabriciolfj.payment_dynamodb.configuration.kafka
 
 import io.micrometer.common.KeyValues
 import org.apache.kafka.clients.consumer.ConsumerConfig

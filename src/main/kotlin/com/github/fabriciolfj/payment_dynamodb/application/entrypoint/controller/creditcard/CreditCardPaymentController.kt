@@ -3,7 +3,7 @@ package com.github.fabriciolfj.payment_dynamodb.application.entrypoint.controlle
 import com.github.fabriciolfj.payment_dynamodb.application.entrypoint.controller.creditcard.CreditCardPaymentMapper.toEntity
 import com.github.fabriciolfj.payment_dynamodb.application.entrypoint.controller.creditcard.CreditCardPaymentMapper.toResponse
 import com.github.fabriciolfj.payment_dynamodb.domain.usecase.cardcredit.FindCardCreditByIdentifier
-import com.github.fabriciolfj.payment_dynamodb.domain.usecase.cardcredit.SavePaymentCardCreditUseCase
+import com.github.fabriciolfj.payment_dynamodb.domain.usecase.cardcredit.ProcessCreatePaymentCardCreditUseCase
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotEmpty
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/credit-card-payments")
-class CreditCardPaymentController(private val savePaymentCardCreditUseCase: SavePaymentCardCreditUseCase,
+class CreditCardPaymentController(private val processCreatePaymentCardCreditUseCase: ProcessCreatePaymentCardCreditUseCase,
                                   private val findCardCreditByIdentifier: FindCardCreditByIdentifier) {
 
     private val log = KotlinLogging.logger {}
@@ -21,7 +21,7 @@ class CreditCardPaymentController(private val savePaymentCardCreditUseCase: Save
         log.info { "payload receive create payment card credit $request" }
 
         val card = toEntity(request)
-        savePaymentCardCreditUseCase.execute(card)
+        processCreatePaymentCardCreditUseCase.execute(card)
     }
 
     @GetMapping("/{identifier}")

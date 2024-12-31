@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.payment_dynamodb.configuration
+package com.github.fabriciolfj.payment_dynamodb.configuration.annotation
 
 import org.springframework.stereotype.Service
 
