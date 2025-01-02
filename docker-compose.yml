@@ -74,3 +74,13 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+  mockserver:
+    image: mockserver/mockserver:latest
+    ports:
+      - "9001:1080"
+    environment:
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /mocks/*.json
+      MOCKSERVER_WATCH_INITIALIZATION_JSON: 'true'
+    volumes:
+      - ./mock:/mocks:ro

@@ -8,13 +8,26 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class RabbitQueueConfigRisk(@Value("\${rabbit.risk.queue}") private val queueName: String) {
+class RabbitQueueConfigRisk(@Value("\${rabbit.risk.queue}") private val queueName: String,
+                           @Value("\${rabbit.risk.result}") private val queueResultRisk: String) {
 
     @Bean
     fun queueRisk() = Queue(queueName, true)
 
     @Bean
+    fun queueResultRisk() = Queue(queueResultRisk, true)
+
+    @Bean
     fun exchangeRisk() = DirectExchange(queueName)
+
+    @Bean
+    fun exachangeResultRisk() = DirectExchange(queueResultRisk)
+
+    @Bean
+    fun bindingResultRisk() = BindingBuilder
+        .bind(queueResultRisk())
+        .to(exachangeResultRisk())
+        .with(queueResultRisk)
 
     @Bean
     fun bindingRisk() =
@@ -22,5 +35,4 @@ class RabbitQueueConfigRisk(@Value("\${rabbit.risk.queue}") private val queueNam
             .bind(queueRisk())
             .to(exchangeRisk())
             .with(queueName)
-
 }

@@ -50,5 +50,6 @@ logging:
 rabbit:
   risk:
     queue: queue-risk
+    result: queue-result-risk
 
 
