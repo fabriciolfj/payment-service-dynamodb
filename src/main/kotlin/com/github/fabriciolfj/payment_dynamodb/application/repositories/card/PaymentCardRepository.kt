@@ -8,12 +8,28 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable
 import software.amazon.awssdk.enhanced.dynamodb.Expression
 import software.amazon.awssdk.enhanced.dynamodb.model.PutItemEnhancedRequest
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.keyEqualTo
+import software.amazon.awssdk.enhanced.dynamodb.model.UpdateItemEnhancedRequest
 import software.amazon.awssdk.services.dynamodb.model.ConditionalCheckFailedException
 
 @Repository
 class PaymentCardRepository(private val table: DynamoDbTable<PaymentCardData>) {
 
     private val log = KotlinLogging.logger {}
+
+    fun update(paymentCard: PaymentCardData) {
+        val expression = Expression.builder().expression("attribute_exists(code)").build()
+
+        val updateRequest = UpdateItemEnhancedRequest.builder(PaymentCardData::class.java)
+            .conditionExpression(expression)
+            .item(paymentCard)
+            .build()
+
+        try {
+            table.updateItem(updateRequest)
+        } catch (e: Exception) {
+            throw e
+        }
+    }
 
     fun save(paymentCard: PaymentCardData) {
         val expression = Expression.builder().expression("attribute_not_exists(code)").build()

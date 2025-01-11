@@ -3,7 +3,7 @@ package com.github.fabriciolfj.payment_dynamodb.domain.entities
 data class CreditCardPayment(val code: String,
                              val installments: Int,
                              private val flag: FlagCardCredit,
-                             private val payment: PaymentCard) {
+                             private var payment: PaymentCard) {
 
     val value = this.payment.value
 
@@ -18,4 +18,9 @@ data class CreditCardPayment(val code: String,
     val type = TypeCard.CREDIT.name
 
     val datePayment = this.payment.date
+
+    fun updateStatus(status: Status) : CreditCardPayment {
+        this.payment = this.payment.copy(status = status)
+        return this
+    }
 }

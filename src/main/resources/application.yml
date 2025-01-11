@@ -52,4 +52,7 @@ rabbit:
     queue: queue-risk
     result: queue-result-risk
 
+topic:
+  kafka:
+    request-approve: request-approve
 
