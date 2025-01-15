@@ -84,3 +84,12 @@ services:
       MOCKSERVER_WATCH_INITIALIZATION_JSON: 'true'
     volumes:
       - ./mock:/mocks:ro
+
+  credit-card-service:
+    image: credit-card-service-go:latest
+    depends_on:
+      - kafka
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - kafka-network
