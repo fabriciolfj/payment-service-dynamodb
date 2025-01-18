@@ -9,7 +9,7 @@ class ResultApproveCreditListener {
 
     private val log = KotlinLogging.logger {  }
 
-    @KafkaListener(topics = ["\${topic.kafka.result-approve}"], groupId = "\${kafka.group-id.payment}")
+    @KafkaListener(topics = ["\${kafka.topic.result-approve}"], groupId = "\${kafka.group-id.payment}")
     fun receive(message: String) {
         log.info { "result approve credit $message" }
     }

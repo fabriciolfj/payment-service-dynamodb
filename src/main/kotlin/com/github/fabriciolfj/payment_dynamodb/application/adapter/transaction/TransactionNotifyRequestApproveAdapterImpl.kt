@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 @Component
 class TransactionNotifyRequestApproveAdapterImpl(private val kafkaTemplate: KafkaTemplate<String, String>,
                                                  private val objetMapper: ObjectMapper,
-                                                 @Value("\${topic.kafka.request-approve}")
+                                                 @Value("\${kafka.topic.request-approve}")
                                                  private val topic: String) : TransactionNotifyRequestApproveAdapter {
 
     private val log = KotlinLogging.logger {  }

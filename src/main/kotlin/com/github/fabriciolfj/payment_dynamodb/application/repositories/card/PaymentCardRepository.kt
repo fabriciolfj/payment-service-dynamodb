@@ -57,7 +57,7 @@ class PaymentCardRepository(private val table: DynamoDbTable<PaymentCardData>) {
             .let { items ->
                 when {
                     items.isEmpty() -> throw NoSuchElementException("payment card with id $identifier not found")
-                    items.size > 1 -> throw IllegalStateException("multiple payment cards found for identifier $identifier")
+                    items.size > 1 -> items.filter { it.datePayment != null }.maxBy { it.datePayment!! }
                     else -> items.first()
                 }
             }

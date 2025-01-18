@@ -15,7 +15,7 @@ spring:
   kafka:
     # Configuração do servidor Kafka
     bootstrap-servers:
-      - localhost:29092    # Endereço do broker Kafka (porta interna do container)
+      - localhost:9092    # Endereço do broker Kafka (porta interna do container)
 
     # Configurações do Consumer
     consumer:
@@ -52,11 +52,10 @@ rabbit:
     queue: queue-risk
     result: queue-result-risk
 
-topic:
-  kafka:
+kafka:
+  topic:
     request-approve: request-approve
     result-approve: result-approve
-kafka:
   group-id:
     payment: payment-service-groupid
 
