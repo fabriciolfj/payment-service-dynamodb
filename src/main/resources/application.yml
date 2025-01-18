@@ -55,4 +55,8 @@ rabbit:
 topic:
   kafka:
     request-approve: request-approve
+    result-approve: result-approve
+kafka:
+  group-id:
+    payment: payment-service-groupid
 
